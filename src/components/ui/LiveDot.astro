@@ -1,0 +1,68 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+  class?: string;
+}
+
+const { size = 'md', class: className } = Astro.props;
+---
+
+<span class:list={['live-dot', `live-dot--${size}`, className]} aria-hidden="true">
+  <span class="live-dot__ping"></span>
+  <span class="live-dot__solid"></span>
+</span>
+
+<style>
+  .live-dot {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+  }
+
+  .live-dot--sm {
+    width: 8px;
+    height: 8px;
+  }
+
+  .live-dot--md {
+    width: 10px;
+    height: 10px;
+  }
+
+  .live-dot--lg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .live-dot__ping {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-full);
+    background-color: var(--color-success);
+    opacity: 0.75;
+    animation: livePing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  .live-dot__solid {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-full);
+    background-color: var(--color-success-dark);
+  }
+
+  @keyframes livePing {
+    75%,
+    100% {
+      transform: scale(2.2);
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .live-dot__ping {
+      animation: none;
+      display: none;
+    }
+  }
+</style>

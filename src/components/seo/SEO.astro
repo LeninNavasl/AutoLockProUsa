@@ -1,0 +1,106 @@
+---
+import JsonLd from '@components/seo/JsonLd.astro';
+import { SITE_CONFIG } from '@config/site';
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+  canonicalUrl?: string | undefined;
+  image?: string | undefined;
+  type?: 'website' | 'article' | undefined;
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>> | undefined;
+}
+
+const {
+  title = `${SITE_CONFIG.name} · ${SITE_CONFIG.tagline}`,
+  description = SITE_CONFIG.description,
+  canonicalUrl = Astro.url.href,
+  image = `${SITE_CONFIG.domain}/og-image.jpg`,
+  type = 'website',
+  jsonLd
+} = Astro.props;
+
+// Schema.org LocalBusiness (Locksmith subtype)
+const defaultSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Locksmith',
+  name: SITE_CONFIG.name,
+  description: SITE_CONFIG.description,
+  url: SITE_CONFIG.domain,
+  telephone: `+1${SITE_CONFIG.phoneRaw}`,
+  email: SITE_CONFIG.email,
+  priceRange: '$$',
+  openingHours: 'Mo,Tu,We,Th,Fr,Sa,Su 00:00-24:00',
+  areaServed: {
+    '@type': 'Country',
+    name: 'United States'
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Automotive Locksmith Roadside Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Emergency Car Lockout Assistance',
+          description: 'Non-destructive vehicle unlocking on-site nationwide.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Smart Key & Fob Programming',
+          description: 'OBD-II vehicle transponder key programming without dealer towing.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Computerized Laser Key Cutting',
+          description: 'CNC milling for high-security sidewinder keys.'
+        }
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Ignition Cylinder Repair',
+          description: 'On-site ignition switch tumbler repair and broken key extraction.'
+        }
+      }
+    ]
+  }
+};
+---
+
+<!-- Core Meta -->
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Favicon & Brand Icons -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" href="/favicon.svg" />
+<meta name="theme-color" content="#faf8ff" />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:site_name" content={SITE_CONFIG.name} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalUrl} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<!-- Structured Data -->
+<JsonLd data={jsonLd || defaultSchema} />

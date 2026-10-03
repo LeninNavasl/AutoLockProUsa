@@ -1,0 +1,47 @@
+---
+import icons from '@iconify-json/material-symbols/icons.json';
+import { getIconData, iconToSVG } from '@iconify/utils';
+
+interface Props {
+  name: string;
+  size?: number | string | undefined;
+  class?: string | undefined;
+  ariaLabel?: string | undefined;
+}
+
+const { name, size = 20, class: className, ariaLabel } = Astro.props;
+
+// Normalizing icon name (e.g. 'phone_in_talk' or 'material-symbols:phone_in_talk' -> 'phone-in-talk')
+const normalizedName = name.replace(/^material-symbols:/, '').replace(/_/g, '-');
+const iconData = getIconData(icons, normalizedName);
+
+if (!iconData) {
+  console.warn(`Icon "${name}" not found in @iconify-json/material-symbols`);
+}
+
+const rendered = iconData ? iconToSVG(iconData) : null;
+const isDecorative = !ariaLabel;
+const pxSize = typeof size === 'number' ? `${size}px` : size;
+---
+
+{rendered ? (
+  <svg
+    viewBox={rendered.attributes.viewBox}
+    width={pxSize}
+    height={pxSize}
+    class:list={['ui-icon', className]}
+    aria-hidden={isDecorative ? 'true' : undefined}
+    aria-label={ariaLabel}
+    role={isDecorative ? undefined : 'img'}
+    set:html={rendered.body}
+  />
+) : null}
+
+<style>
+  .ui-icon {
+    display: inline-block;
+    vertical-align: middle;
+    flex-shrink: 0;
+    fill: currentColor;
+  }
+</style>

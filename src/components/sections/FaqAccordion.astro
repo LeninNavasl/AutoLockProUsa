@@ -1,0 +1,163 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import type { FaqItem } from '@data/faqs';
+
+interface Props {
+  faqs: FaqItem[];
+  title?: string;
+  subtitle?: string;
+}
+
+const {
+  faqs,
+  title = 'Frequently Asked Questions',
+  subtitle = 'Clear answers about response windows, pricing, and roadside technology.'
+} = Astro.props;
+---
+
+<section class="faq-section" aria-labelledby="faq-title">
+  <div class="container">
+    <div class="faq-section__header">
+      <div class="faq-section__icon-well">
+        <Icon name="quiz" size={24} />
+      </div>
+      <h2 id="faq-title" class="faq-section__title">
+        {title}
+      </h2>
+      {subtitle && <p class="faq-section__subtitle">{subtitle}</p>}
+    </div>
+
+    <div class="faq-section__list">
+      {faqs.map((faq) => (
+        <details class="faq-item">
+          <summary class="faq-item__trigger">
+            <span class="faq-item__question">{faq.question}</span>
+            <span class="faq-item__chevron" aria-hidden="true">
+              <Icon name="expand_more" size={20} />
+            </span>
+          </summary>
+          <div class="faq-item__content">
+            <p class="faq-item__answer">{faq.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq-section {
+    padding-block: var(--space-lg);
+  }
+
+  .faq-section__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+  }
+
+  .faq-section__icon-well {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: var(--color-surface-container);
+    color: var(--color-primary-container);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--space-xs);
+  }
+
+  .faq-section__title {
+    font-size: var(--text-headline-md);
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .faq-section__subtitle {
+    font-size: var(--text-body-md);
+    color: var(--color-ink-muted);
+    max-width: 32rem;
+  }
+
+  .faq-section__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+
+  .faq-item {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition:
+      border-color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  .faq-item[open] {
+    border-color: var(--color-primary-fixed);
+    box-shadow: var(--shadow-1);
+  }
+
+  .faq-item__trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-md);
+    padding: var(--space-md);
+    font-size: var(--text-headline-sm);
+    font-weight: 700;
+    color: var(--color-ink);
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Hide default browser marker */
+  .faq-item__trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-item__trigger::marker {
+    display: none;
+  }
+
+  .faq-item__chevron {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-ink-muted);
+    transition: transform var(--transition-normal);
+  }
+
+  .faq-item[open] .faq-item__chevron {
+    transform: rotate(180deg);
+    color: var(--color-primary);
+  }
+
+  .faq-item__content {
+    padding-inline: var(--space-md);
+    padding-bottom: var(--space-md);
+  }
+
+  .faq-item__answer {
+    font-size: var(--text-body-md);
+    color: var(--color-ink-muted);
+    line-height: 1.6;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .faq-item__chevron {
+      transition: none;
+    }
+  }
+</style>

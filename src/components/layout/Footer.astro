@@ -1,0 +1,193 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import { SITE_CONFIG } from '@config/site';
+import { formatTelHref } from '@lib/contact';
+
+const currentYear = new Date().getFullYear();
+const telHref = formatTelHref(SITE_CONFIG.phoneDisplay);
+---
+
+<footer class="site-footer">
+  <div class="site-footer__container container">
+    <!-- Brand Info -->
+    <div class="site-footer__brand-block">
+      <a href="/" class="site-footer__brand-link" aria-label="AutoLock Pro USA - Home">
+        <img
+          src="/logo.svg"
+          alt="AutoLock Pro USA Logo"
+          width="160"
+          height="42"
+          class="site-footer__logo"
+        />
+      </a>
+      <p class="site-footer__desc">{SITE_CONFIG.tagline}</p>
+      <a href={telHref} class="site-footer__phone-link">
+        <Icon name="call" size={18} />
+        <span>{SITE_CONFIG.phoneDisplay}</span>
+      </a>
+    </div>
+
+    <!-- Navigation Directory -->
+    <nav class="site-footer__nav" aria-label="Footer Navigation">
+      <ul class="site-footer__menu">
+        {SITE_CONFIG.navItems.map((item, idx) => (
+          <li class="site-footer__item">
+            <a href={item.href} class="site-footer__link">
+              {item.label}
+            </a>
+            {idx < SITE_CONFIG.navItems.length - 1 && (
+              <span class="site-footer__divider" aria-hidden="true">
+                •
+              </span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Licensing & Compliance Notice -->
+    <div class="site-footer__licenses">
+      <p class="site-footer__license-text">
+        Fully Licensed, Bonded & Insured Roadside Technicians · Operating in accordance with state
+        locksmith regulations:
+      </p>
+      <div class="site-footer__license-tags">
+        {SITE_CONFIG.licenses.map((lic) => (
+          <span class="site-footer__license-tag">
+            <strong>{lic.state}:</strong> {lic.code}
+          </span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="site-footer__bottom">
+      <p class="site-footer__copyright">
+        © {currentYear} {SITE_CONFIG.name}. All rights reserved. Damage-free automotive locksmith
+        dispatch.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: var(--color-surface-container-low);
+    border-top: 1px solid var(--color-border);
+    padding-block: var(--space-xl) var(--space-2xl);
+    margin-top: auto;
+  }
+
+  .site-footer__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-lg);
+  }
+
+  .site-footer__brand-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .site-footer__logo {
+    height: 2.25rem;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .site-footer__desc {
+    max-width: 28rem;
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .site-footer__phone-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    color: var(--color-primary-container);
+    font-weight: 800;
+    font-size: var(--text-headline-sm);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
+    transition: color var(--transition-fast);
+  }
+
+  .site-footer__phone-link:hover {
+    color: var(--color-primary);
+  }
+
+  .site-footer__nav {
+    padding-block: var(--space-xs);
+  }
+
+  .site-footer__menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    gap: var(--space-sm);
+  }
+
+  .site-footer__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .site-footer__link {
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    transition: color var(--transition-fast);
+  }
+
+  .site-footer__link:hover {
+    color: var(--color-primary-container);
+  }
+
+  .site-footer__divider {
+    color: var(--color-ink-subtle);
+  }
+
+  .site-footer__licenses {
+    max-width: 36rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    font-size: var(--text-label-sm);
+    color: var(--color-ink-subtle);
+  }
+
+  .site-footer__license-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-top: 0.25rem;
+  }
+
+  .site-footer__license-tag {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 0.15rem 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  .site-footer__bottom {
+    border-top: 1px solid var(--color-border);
+    width: 100%;
+    padding-top: var(--space-md);
+  }
+
+  .site-footer__copyright {
+    font-size: var(--text-label-sm);
+    color: var(--color-ink-subtle);
+  }
+</style>

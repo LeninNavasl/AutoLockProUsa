@@ -1,0 +1,30 @@
+# Build and Dependencies
+node_modules/
+dist/
+.astro/
+
+# Environment Variables
+.env
+.env.production
+.env.local
+.env.*.local
+
+# Logs and Debugging
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# System and Editor Files
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary scratch and cache
+scratch/
+.temp/
+.cache/

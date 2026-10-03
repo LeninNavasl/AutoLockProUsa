@@ -1,0 +1,50 @@
+{
+  "name": "autolock-pro-usa",
+  "description": "AutoLock Pro USA — static marketing website for a nationwide mobile automotive locksmith service.",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "audit:deps": "npm audit --audit-level=high --omit=dev",
+    "audit:security": "node harness/scripts/security-audit.mjs",
+    "verify": "node harness/scripts/verify.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource-variable/plus-jakarta-sans": "^5.3.0",
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@iconify-json/material-symbols": "^1.2.94",
+    "@iconify/utils": "^3.1.7",
+    "eslint": "^10.12.0",
+    "eslint-plugin-astro": "^3.2.1",
+    "eslint-plugin-jsx-a11y-x": "^0.2.0",
+    "prettier": "^3.9.9",
+    "prettier-plugin-astro": "^1.1.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.71.0",
+    "vitest": "^5.0.3"
+  },
+  "allowScripts": {
+    "esbuild": true,
+    "sharp": true
+  }
+}

@@ -1,0 +1,188 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import PhoneLink from '@components/ui/PhoneLink.astro';
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  badgeText?: string;
+}
+
+const {
+  title = 'Stuck right now?',
+  subtitle = 'Connect with our 24-hour dispatch hotline. A certified mobile automotive locksmith is already rolling near your location.',
+  badgeText = 'Priority Roadside Queue'
+} = Astro.props;
+---
+
+<section class="cta-banner" aria-label="Emergency Assistance Callout">
+  <div class="container">
+    <div class="cta-banner__card">
+      <!-- Decorative Backdrop Geometry -->
+      <div class="cta-banner__circle cta-banner__circle--top" aria-hidden="true"></div>
+      <div class="cta-banner__circle cta-banner__circle--bottom" aria-hidden="true"></div>
+
+      <div class="cta-banner__content">
+        <!-- Priority Pill -->
+        <div class="cta-banner__badge">
+          <Icon name="bolt" size={18} class="cta-banner__badge-icon" />
+          <span>{badgeText}</span>
+        </div>
+
+        <div class="cta-banner__text">
+          <h2 class="cta-banner__title">{title}</h2>
+          <p class="cta-banner__desc">{subtitle}</p>
+        </div>
+
+        <!-- Call Button -->
+        <div class="cta-banner__btn-wrap">
+          <PhoneLink variant="block" prefixText="Call Now" />
+        </div>
+
+        <!-- Reassurance Footer -->
+        <div class="cta-banner__reassurance">
+          <span class="cta-banner__reassurance-item">
+            <Icon name="schedule" size={16} />
+            <span>24/7/365</span>
+          </span>
+          <span class="cta-banner__divider" aria-hidden="true">
+            •
+          </span>
+          <span class="cta-banner__reassurance-item">
+            <Icon name="pin_drop" size={16} />
+            <span>Mobile Direct</span>
+          </span>
+          <span class="cta-banner__divider" aria-hidden="true">
+            •
+          </span>
+          <span class="cta-banner__reassurance-item">
+            <Icon name="verified" size={16} />
+            <span>Fully Insured</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-banner {
+    padding-block: var(--space-lg);
+  }
+
+  .cta-banner__card {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-container) 0%,
+      var(--color-primary) 60%,
+      #003ea8 100%
+    );
+    color: var(--color-on-primary);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-3);
+  }
+
+  .cta-banner__circle {
+    position: absolute;
+    border-radius: var(--radius-full);
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.08);
+    filter: blur(40px);
+  }
+
+  .cta-banner__circle--top {
+    top: -3rem;
+    right: -3rem;
+    width: 14rem;
+    height: 14rem;
+  }
+
+  .cta-banner__circle--bottom {
+    bottom: -3rem;
+    left: -3rem;
+    width: 12rem;
+    height: 12rem;
+  }
+
+  .cta-banner__content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-md);
+    max-width: 38rem;
+    margin-inline: auto;
+  }
+
+  .cta-banner__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(255, 255, 255, 0.16);
+    backdrop-filter: blur(8px);
+    color: var(--color-on-primary);
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+  }
+
+  .cta-banner__badge-icon {
+    color: #ffedd5;
+  }
+
+  .cta-banner__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .cta-banner__title {
+    font-size: var(--text-headline-lg);
+    font-weight: 800;
+    color: var(--color-on-primary);
+    line-height: 1.15;
+  }
+
+  .cta-banner__desc {
+    font-size: var(--text-body-md);
+    color: var(--color-primary-fixed);
+    line-height: 1.6;
+  }
+
+  .cta-banner__btn-wrap {
+    width: 100%;
+    max-width: 22rem;
+  }
+
+  .cta-banner__reassurance {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-size: var(--text-label-sm);
+    color: var(--color-primary-fixed);
+  }
+
+  .cta-banner__reassurance-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .cta-banner__divider {
+    opacity: 0.6;
+  }
+
+  @media (min-width: 48rem) {
+    .cta-banner__card {
+      padding: var(--space-2xl) var(--space-xl);
+    }
+  }
+</style>

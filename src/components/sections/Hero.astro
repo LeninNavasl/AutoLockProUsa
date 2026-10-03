@@ -1,0 +1,188 @@
+---
+import Badge from '@components/ui/Badge.astro';
+import Icon from '@components/ui/Icon.astro';
+import LiveDot from '@components/ui/LiveDot.astro';
+import PhoneLink from '@components/ui/PhoneLink.astro';
+---
+
+<section class="hero-section" aria-labelledby="hero-title">
+  <div class="hero-section__container container">
+    <!-- Ambient Backdrop Aura -->
+    <div class="hero-section__aura hero-section__aura--primary" aria-hidden="true"></div>
+    <div class="hero-section__aura hero-section__aura--emergency" aria-hidden="true"></div>
+
+    <div class="hero-section__content">
+      <!-- Live Status Pill -->
+      <div class="hero-section__badge-row">
+        <Badge variant="surface" size="md">
+          <LiveDot size="sm" />
+          <span class="hero-section__badge-text">24/7 Mobile Dispatch Across All 50 States</span>
+        </Badge>
+      </div>
+
+      <!-- Main Headline -->
+      <h1 id="hero-title" class="hero-section__title">
+        Fast car key replacement &<span class="hero-section__title-gradient">door unlocking.</span>
+      </h1>
+
+      <p class="hero-section__subtitle">
+        Licensed mobile roadside locksmiths dispatched directly to your location. Fast, damage-free
+        service nationwide with zero dealership wait.
+      </p>
+
+      <!-- Primary Conversion Actions -->
+      <div class="hero-section__actions">
+        <div class="hero-section__action-primary">
+          <PhoneLink variant="block" prefixText="Call Now" />
+        </div>
+        <div class="hero-section__action-secondary">
+          <a href="/services/" class="hero-section__services-btn">
+            <span>View Services</span>
+            <Icon name="arrow_forward" size={18} />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero-section {
+    position: relative;
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+    overflow: hidden;
+  }
+
+  .hero-section__container {
+    position: relative;
+  }
+
+  /* Decorative Ambient Glows */
+  .hero-section__aura {
+    position: absolute;
+    border-radius: var(--radius-full);
+    pointer-events: none;
+    filter: blur(60px);
+    opacity: 0.22;
+    z-index: 0;
+  }
+
+  .hero-section__aura--primary {
+    top: -2rem;
+    right: -2rem;
+    width: 18rem;
+    height: 18rem;
+    background: var(--color-primary-container);
+  }
+
+  .hero-section__aura--emergency {
+    bottom: -1rem;
+    left: -3rem;
+    width: 16rem;
+    height: 16rem;
+    background: var(--color-emergency);
+  }
+
+  .hero-section__content {
+    position: relative;
+    z-index: 1;
+    max-width: 44rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .hero-section__badge-row {
+    display: flex;
+  }
+
+  .hero-section__badge-text {
+    color: var(--color-success-dark);
+  }
+
+  .hero-section__title {
+    font-size: var(--text-display);
+    font-weight: 800;
+    color: var(--color-ink);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .hero-section__title-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary-container) 0%,
+      var(--color-primary) 60%,
+      var(--color-accent) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  .hero-section__subtitle {
+    font-size: var(--text-body-lg);
+    color: var(--color-ink-muted);
+    max-width: 38rem;
+    line-height: 1.6;
+  }
+
+  .hero-section__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    padding-top: var(--space-xs);
+    width: 100%;
+    max-width: 26rem;
+  }
+
+  .hero-section__action-primary {
+    width: 100%;
+  }
+
+  .hero-section__action-secondary {
+    width: 100%;
+  }
+
+  .hero-section__services-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    width: 100%;
+    padding: 0.8rem 1.5rem;
+    background: var(--color-surface-container);
+    color: var(--color-ink);
+    border-radius: var(--radius-full);
+    font-size: var(--text-label-md);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      background-color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .hero-section__services-btn:hover {
+    background: var(--color-surface-container-high);
+  }
+
+  .hero-section__services-btn:active {
+    transform: scale(0.98);
+  }
+
+  @media (min-width: 40rem) {
+    .hero-section__actions {
+      flex-direction: row;
+      max-width: 32rem;
+    }
+
+    .hero-section__action-primary {
+      flex: 1.4;
+    }
+
+    .hero-section__action-secondary {
+      flex: 1;
+    }
+  }
+</style>

@@ -1,0 +1,607 @@
+---
+import { Image } from 'astro:assets';
+import CtaBanner from '@components/sections/CtaBanner.astro';
+import FaqAccordion from '@components/sections/FaqAccordion.astro';
+import Badge from '@components/ui/Badge.astro';
+import Icon from '@components/ui/Icon.astro';
+import LiveDot from '@components/ui/LiveDot.astro';
+import { SITE_CONFIG } from '@config/site';
+import { FAQS } from '@data/faqs';
+import { formatMailtoHref, formatTelHref } from '@lib/contact';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import vanShowcaseImg from '@assets/images/van-showcase.jpg';
+
+const telHref = formatTelHref(SITE_CONFIG.phoneDisplay);
+const mailtoHref = formatMailtoHref(SITE_CONFIG.email, 'AutoLock Pro USA - Service Inquiry');
+---
+
+<BaseLayout
+  title={`24/7 Nationwide Support & Contact | ${SITE_CONFIG.name}`}
+  description="Contact AutoLock Pro USA 24/7 dispatch desk by phone or email. Instant roadside mobile locksmith dispatch across all 50 states."
+  currentPath="/contact/"
+>
+  <div class="contact-page">
+    <div class="container contact-page__container">
+      <!-- Page Header -->
+      <section class="contact-header">
+        <Badge variant="primary" size="md">
+          <Icon name="headset_mic" size={16} />
+          <span>Direct Assistance Desk</span>
+        </Badge>
+        <h1 class="contact-header__title">24/7 Nationwide Support</h1>
+        <p class="contact-header__subtitle">
+          Immediate roadside dispatch and scheduled locksmith services across the United States.
+        </p>
+      </section>
+
+      <!-- Live Fleet Status Banner -->
+      <div class="contact-fleet-status">
+        <div class="contact-fleet-status__info">
+          <LiveDot size="md" />
+          <div class="contact-fleet-status__text">
+            <span class="contact-fleet-status__title">
+              Live Fleet Status: Active Across 50 States
+            </span>
+            <span class="contact-fleet-status__desc">
+              Average mobile response window: 15–30 mins
+            </span>
+          </div>
+        </div>
+        <span class="contact-fleet-status__badge">Live</span>
+      </div>
+
+      <!-- Emergency Call Card (Primary) -->
+      <section class="contact-emergency-card" aria-labelledby="emergency-card-title">
+        <div class="contact-emergency-card__badge-row">
+          <span class="contact-emergency-card__urgency-pill">
+            <span class="contact-emergency-card__pulse-dot" aria-hidden="true"></span>
+            <span>High Urgency Roadside Unit</span>
+          </span>
+        </div>
+
+        <h2 id="emergency-card-title" class="contact-emergency-card__title">
+          Locked out or stranded right now?
+        </h2>
+        <p class="contact-emergency-card__desc">
+          Our national dispatch desk connects you with the nearest active mobile van in your area.
+          Speak with an operator immediately:
+        </p>
+
+        <div class="contact-emergency-card__action">
+          <a
+            href={telHref}
+            class="contact-emergency-card__phone-btn"
+            aria-label={`Call emergency dispatch at ${SITE_CONFIG.phoneDisplay}`}
+          >
+            <span class="contact-emergency-card__btn-icon">
+              <Icon name="phone_in_talk" size={24} />
+            </span>
+            <span class="contact-emergency-card__btn-text">
+              Call Dispatch: {SITE_CONFIG.phoneDisplay}
+            </span>
+          </a>
+        </div>
+
+        <!-- 4-Pill Trust Matrix -->
+        <div class="contact-emergency-card__features">
+          <div class="contact-emergency-card__feature">
+            <Icon name="verified" size={18} class="contact-emergency-card__feat-icon" />
+            <span>24/7/365 Availability</span>
+          </div>
+          <div class="contact-emergency-card__feature">
+            <Icon name="pin_drop" size={18} class="contact-emergency-card__feat-icon" />
+            <span>50-State Coverage</span>
+          </div>
+          <div class="contact-emergency-card__feature">
+            <Icon name="shield" size={18} class="contact-emergency-card__feat-icon" />
+            <span>Licensed & Insured Techs</span>
+          </div>
+          <div class="contact-emergency-card__feature">
+            <Icon name="directions_car" size={18} class="contact-emergency-card__feat-icon" />
+            <span>Damage-Free Guarantee</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Field Tech Visual Showcase -->
+      <div class="contact-showcase">
+        <div class="contact-showcase__media">
+          <Image
+            src={vanShowcaseImg}
+            alt="Mobile locksmith van equipped with laser key cutting machines parked at curb"
+            width={800}
+            height={400}
+            class="contact-showcase__img"
+            loading="lazy"
+          />
+        </div>
+        <div class="contact-showcase__bar">
+          <div class="contact-showcase__bar-text">
+            <strong>Fully Outfitted Mobile Vans</strong>
+            <span>Carrying OEM fobs, picks & diagnostic computers</span>
+          </div>
+          <div class="contact-showcase__bar-icon">
+            <Icon name="electric_bolt" size={20} />
+          </div>
+        </div>
+      </div>
+
+      <!-- Direct Email Card (Zero forms, privacy-first) -->
+      <section class="contact-email-card" aria-labelledby="email-inquiry-title">
+        <div class="contact-email-card__header">
+          <div class="contact-email-card__header-text">
+            <h2 id="email-inquiry-title" class="contact-email-card__title">
+              Scheduled Service & Email Inquiries
+            </h2>
+            <p class="contact-email-card__subtitle">
+              For scheduled duplicate keys, spare fobs, fleet quotes, or non-urgent business
+              inquiries.
+            </p>
+          </div>
+          <div class="contact-email-card__header-icon">
+            <Icon name="calendar_today" size={24} />
+          </div>
+        </div>
+
+        <div class="contact-email-card__notice">
+          <Icon name="info" size={20} class="contact-email-card__notice-icon" />
+          <p>
+            For immediate vehicle lockouts or broken ignition emergencies, please call our 24/7
+            phone dispatch above.
+          </p>
+        </div>
+
+        <!-- Email Display & Interactive Copy Box -->
+        <div class="contact-email-box">
+          <span class="contact-email-box__label">Direct Dispatch Email</span>
+          <div class="contact-email-box__address-row">
+            <code class="contact-email-box__address">{SITE_CONFIG.email}</code>
+          </div>
+
+          <div class="contact-email-box__actions">
+            <button
+              type="button"
+              id="copy-email-btn"
+              class="contact-email-box__copy-btn"
+              data-email={SITE_CONFIG.email}
+              aria-label="Copy dispatch email address to clipboard"
+            >
+              <Icon name="content_copy" size={18} />
+              <span class="btn-copy-text">Copy Email Address</span>
+            </button>
+
+            <a href={mailtoHref} class="contact-email-box__mailto-btn">
+              <span>Open in Email App</span>
+              <Icon name="arrow_forward" size={16} />
+            </a>
+          </div>
+
+          <!-- Accessible Live Region for Screen Readers -->
+          <div id="copy-feedback" class="sr-only" aria-live="polite"></div>
+        </div>
+
+        <p class="contact-email-card__footer-note">
+          ✓ Inquiries received via email are reviewed and answered within 1 business hour.
+        </p>
+      </section>
+
+      <!-- Frequently Asked Questions -->
+      <FaqAccordion faqs={FAQS} />
+    </div>
+  </div>
+
+  <!-- Emergency Dispatch CTA Banner -->
+  <CtaBanner />
+
+  <!-- Progressive Email Copy Script -->
+  <script src="../scripts/copy-email.ts"></script>
+</BaseLayout>
+
+<style>
+  .contact-page {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-2xl);
+  }
+
+  .contact-page__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+    max-width: 48rem;
+  }
+
+  /* Header */
+  .contact-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .contact-header__title {
+    font-size: var(--text-headline-lg);
+    font-weight: 800;
+    color: var(--color-ink);
+    margin-top: 0.25rem;
+  }
+
+  .contact-header__subtitle {
+    font-size: var(--text-body-md);
+    color: var(--color-ink-muted);
+  }
+
+  /* Fleet Status Banner */
+  .contact-fleet-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-sm);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-sm) var(--space-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .contact-fleet-status__info {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    min-width: 0;
+  }
+
+  .contact-fleet-status__text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .contact-fleet-status__title {
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    color: var(--color-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .contact-fleet-status__desc {
+    font-size: 0.75rem;
+    color: var(--color-ink-muted);
+  }
+
+  .contact-fleet-status__badge {
+    background: var(--color-surface-container);
+    color: var(--color-primary);
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+  }
+
+  /* Emergency Call Card */
+  .contact-emergency-card {
+    background: linear-gradient(135deg, #c2410c 0%, #ea580c 45%, #2563eb 100%);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-lg);
+    color: #ffffff;
+    box-shadow: var(--shadow-emergency);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .contact-emergency-card__badge-row {
+    display: flex;
+  }
+
+  .contact-emergency-card__urgency-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+  }
+
+  .contact-emergency-card__pulse-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-full);
+    background: #fef08a;
+  }
+
+  .contact-emergency-card__title {
+    font-size: var(--text-headline-md);
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.2;
+  }
+
+  .contact-emergency-card__desc {
+    font-size: var(--text-body-sm);
+    color: rgba(255, 255, 255, 0.95);
+    max-width: 38rem;
+    line-height: 1.5;
+  }
+
+  .contact-emergency-card__action {
+    padding-block: var(--space-xs);
+  }
+
+  .contact-emergency-card__phone-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    width: 100%;
+    padding: 0.875rem 1.5rem;
+    background: #ffffff;
+    color: #c2410c;
+    border-radius: var(--radius-full);
+    font-size: var(--text-label-lg);
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    transition: transform var(--transition-fast);
+  }
+
+  .contact-emergency-card__phone-btn:active {
+    transform: scale(0.98);
+  }
+
+  .contact-emergency-card__btn-icon {
+    display: inline-flex;
+    color: #c2410c;
+  }
+
+  .contact-emergency-card__features {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xs);
+    padding-top: var(--space-xs);
+  }
+
+  .contact-emergency-card__feature {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-xl);
+    padding: 0.5rem 0.75rem;
+    font-size: var(--text-label-sm);
+    font-weight: 600;
+  }
+
+  .contact-emergency-card__feat-icon {
+    color: #a7f3d0;
+  }
+
+  /* Showcase */
+  .contact-showcase {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-3xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .contact-showcase__media {
+    width: 100%;
+    height: 12rem;
+    overflow: hidden;
+    background: var(--color-surface-container);
+  }
+
+  .contact-showcase__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .contact-showcase__bar {
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-surface-dim);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .contact-showcase__bar-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .contact-showcase__bar-text strong {
+    font-size: var(--text-label-md);
+    color: var(--color-ink);
+  }
+
+  .contact-showcase__bar-text span {
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .contact-showcase__bar-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-full);
+    background: var(--color-primary-fixed);
+    color: var(--color-primary);
+  }
+
+  /* Email Card */
+  .contact-email-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .contact-email-card__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-sm);
+  }
+
+  .contact-email-card__title {
+    font-size: var(--text-headline-sm);
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .contact-email-card__subtitle {
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+    margin-top: 0.25rem;
+  }
+
+  .contact-email-card__header-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--color-surface-container);
+    color: var(--color-primary-container);
+    border-radius: var(--radius-xl);
+    flex-shrink: 0;
+  }
+
+  .contact-email-card__notice {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    background: var(--color-surface-container-low);
+    border-radius: var(--radius-xl);
+    padding: var(--space-sm);
+  }
+
+  .contact-email-card__notice-icon {
+    color: var(--color-emergency);
+    flex-shrink: 0;
+  }
+
+  .contact-email-card__notice p {
+    font-size: var(--text-label-sm);
+    color: var(--color-ink-muted);
+  }
+
+  /* Email Box */
+  .contact-email-box {
+    background: var(--color-canvas);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .contact-email-box__label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-ink-subtle);
+  }
+
+  .contact-email-box__address-row {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xs) var(--space-sm);
+  }
+
+  .contact-email-box__address {
+    font-family: var(--font-family-base);
+    font-size: var(--text-headline-sm);
+    font-weight: 800;
+    color: var(--color-primary-container);
+  }
+
+  .contact-email-box__actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .contact-email-box__copy-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-primary-container);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-full);
+    font-size: var(--text-label-md);
+    font-weight: 700;
+    transition:
+      background-color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .contact-email-box__copy-btn:hover {
+    background: var(--color-primary);
+  }
+
+  .contact-email-box__copy-btn:active {
+    transform: scale(0.98);
+  }
+
+  :global(.contact-email-box__copy-btn.btn-copied) {
+    background: var(--color-success-dark) !important;
+  }
+
+  .contact-email-box__mailto-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    width: 100%;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-surface-container);
+    color: var(--color-ink);
+    border-radius: var(--radius-full);
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    text-decoration: none;
+    transition: background-color var(--transition-fast);
+  }
+
+  .contact-email-box__mailto-btn:hover {
+    background: var(--color-surface-container-high);
+  }
+
+  .contact-email-card__footer-note {
+    font-size: var(--text-label-sm);
+    color: var(--color-success-dark);
+    font-weight: 600;
+  }
+
+  @media (min-width: 36rem) {
+    .contact-email-box__actions {
+      flex-direction: row;
+    }
+    .contact-email-box__copy-btn {
+      flex: 1.2;
+    }
+    .contact-email-box__mailto-btn {
+      flex: 1;
+    }
+  }
+</style>

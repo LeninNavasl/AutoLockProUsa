@@ -1,0 +1,88 @@
+:root {
+  /* Brand & Core Palette */
+  --color-primary: #004ac6;
+  --color-primary-container: #2563eb;
+  --color-primary-hover: #1d4ed8;
+  --color-primary-fixed: #dbe1ff;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #eeefff;
+
+  /* Emergency Call Palette (Strictly for phone/call triggers) */
+  --color-emergency: #f97316;
+  --color-emergency-container: #fd761a;
+  --color-emergency-hover: #ea580c;
+  --color-emergency-active: #c2410c;
+  --color-on-emergency: #ffffff;
+
+  /* Status Emerald (24/7 Fleet, availability, verified badges) */
+  --color-success: #10b981;
+  --color-success-dark: #007d55;
+  --color-success-container: #ecfdf5;
+  --color-on-success: #065f46;
+
+  /* Ambient Accent */
+  --color-accent: #06b6d4;
+
+  /* Typography Colors (High contrast, anti-glare) */
+  --color-ink: #0f172a;
+  --color-ink-muted: #434655;
+  --color-ink-subtle: #64748b;
+  --color-border: #e2e8f0;
+  --color-border-subtle: #f1f5f9;
+
+  /* Surfaces & Canvas */
+  --color-canvas: #faf8ff;
+  --color-surface: #ffffff;
+  --color-surface-dim: #f1f5f9;
+  --color-surface-container: #eaedff;
+  --color-surface-container-low: #f2f3ff;
+  --color-surface-container-high: #e2e7ff;
+
+  /* Typography Scale */
+  --font-family-base:
+    'Plus Jakarta Sans Variable', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    sans-serif;
+  --text-display: clamp(2.25rem, 5vw, 3.5rem);
+  --text-headline-lg: clamp(1.75rem, 4vw, 2.5rem);
+  --text-headline-md: clamp(1.35rem, 3vw, 1.75rem);
+  --text-headline-sm: clamp(1.15rem, 2vw, 1.35rem);
+  --text-body-lg: 1.125rem;
+  --text-body-md: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-label-lg: 1rem;
+  --text-label-md: 0.875rem;
+  --text-label-sm: 0.75rem;
+
+  /* Spacing Scale */
+  --space-2xs: 0.125rem;
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2.5rem;
+  --space-2xl: 4rem;
+  --space-3xl: 6rem;
+  --gutter: clamp(1rem, 4vw, 1.5rem);
+  --container-max: 80rem;
+
+  /* Border Radii */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.25rem;
+  --radius-3xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Elevation Shadows */
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+  --shadow-1: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+  --shadow-2: 0 12px 30px -4px rgba(37, 99, 235, 0.09), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+  --shadow-3: 0 20px 40px -8px rgba(15, 23, 42, 0.12);
+  --shadow-emergency: 0 8px 24px -4px rgba(249, 115, 22, 0.35);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-normal: 250ms cubic-bezier(0.2, 0, 0, 1);
+}

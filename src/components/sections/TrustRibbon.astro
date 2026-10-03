@@ -1,0 +1,114 @@
+---
+import Icon from '@components/ui/Icon.astro';
+---
+
+<section class="trust-ribbon" aria-label="Trust and Reliability Highlights">
+  <div class="container trust-ribbon__container">
+    <!-- Quick Trust Metrics Card -->
+    <div class="trust-ribbon__metrics">
+      <div class="trust-ribbon__metric">
+        <div class="trust-ribbon__icon-well trust-ribbon__icon-well--blue">
+          <Icon name="timer" size={22} />
+        </div>
+        <div class="trust-ribbon__metric-info">
+          <span class="trust-ribbon__metric-value">Avg. 25-min</span>
+          <span class="trust-ribbon__metric-label">Arrival Time</span>
+        </div>
+      </div>
+
+      <div class="trust-ribbon__metric">
+        <div class="trust-ribbon__icon-well trust-ribbon__icon-well--green">
+          <Icon name="directions_car" size={22} />
+        </div>
+        <div class="trust-ribbon__metric-info">
+          <span class="trust-ribbon__metric-value">Zero Dealership</span>
+          <span class="trust-ribbon__metric-label">Wait Times</span>
+        </div>
+      </div>
+
+      <div class="trust-ribbon__metric">
+        <div class="trust-ribbon__icon-well trust-ribbon__icon-well--orange">
+          <Icon name="verified" size={22} />
+        </div>
+        <div class="trust-ribbon__metric-info">
+          <span class="trust-ribbon__metric-value">Upfront</span>
+          <span class="trust-ribbon__metric-label">Estimates</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .trust-ribbon {
+    padding-bottom: var(--space-md);
+  }
+
+  .trust-ribbon__container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  /* Metrics Grid */
+  .trust-ribbon__metrics {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-xs);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-sm);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .trust-ribbon__metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-xs);
+    padding: var(--space-xs);
+  }
+
+  .trust-ribbon__icon-well {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .trust-ribbon__icon-well--blue {
+    background: var(--color-surface-container);
+    color: var(--color-primary-container);
+  }
+
+  .trust-ribbon__icon-well--green {
+    background: var(--color-success-container);
+    color: var(--color-success-dark);
+  }
+
+  .trust-ribbon__icon-well--orange {
+    background: #ffedd5;
+    color: #c2410c;
+  }
+
+  .trust-ribbon__metric-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .trust-ribbon__metric-value {
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    color: var(--color-ink);
+    line-height: 1.2;
+  }
+
+  .trust-ribbon__metric-label {
+    font-size: 0.6875rem;
+    color: var(--color-ink-muted);
+  }
+</style>

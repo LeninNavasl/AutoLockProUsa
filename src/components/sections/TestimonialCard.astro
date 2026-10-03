@@ -1,0 +1,117 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import type { TestimonialItem } from '@data/testimonials';
+
+interface Props {
+  testimonial: TestimonialItem;
+}
+
+const { testimonial } = Astro.props;
+---
+
+<article class="testimonial-card">
+  <!-- Rating & Verified Badge -->
+  <div class="testimonial-card__header">
+    <div
+      class="testimonial-card__stars"
+      aria-label={`Rating: ${testimonial.rating} out of 5 stars`}
+    >
+      {Array.from({ length: testimonial.rating }).map(() => (
+        <span class="testimonial-card__star">
+          <Icon name="star" size={18} />
+        </span>
+      ))}
+    </div>
+    <span class="testimonial-card__badge">
+      <Icon name="verified" size={14} />
+      <span>{testimonial.badge}</span>
+    </span>
+  </div>
+
+  <!-- Quote -->
+  <blockquote class="testimonial-card__quote">“{testimonial.quote}”</blockquote>
+
+  <!-- Author & Vehicle -->
+  <footer class="testimonial-card__footer">
+    <span class="testimonial-card__author">
+      {testimonial.author} · {testimonial.location}
+    </span>
+    <span class="testimonial-card__vehicle">{testimonial.vehicle}</span>
+  </footer>
+</article>
+
+<style>
+  .testimonial-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .testimonial-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+  }
+
+  .testimonial-card__stars {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    color: var(--color-emergency);
+  }
+
+  .testimonial-card__star {
+    display: inline-flex;
+  }
+
+  .testimonial-card__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: var(--color-success-container);
+    color: var(--color-success-dark);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-full);
+  }
+
+  .testimonial-card__quote {
+    font-size: var(--text-body-md);
+    color: var(--color-ink);
+    font-weight: 500;
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .testimonial-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-xs);
+    margin-top: auto;
+    padding-top: var(--space-xs);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  .testimonial-card__author {
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .testimonial-card__vehicle {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    background: var(--color-surface-dim);
+    padding: 0.2rem 0.5rem;
+    border-radius: var(--radius-sm);
+  }
+</style>

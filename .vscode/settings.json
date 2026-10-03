@@ -1,0 +1,13 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.associations": {
+    "*.astro": "astro"
+  }
+}

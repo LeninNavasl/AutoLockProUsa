@@ -1,0 +1,67 @@
+---
+import Footer from '@components/layout/Footer.astro';
+import Header from '@components/layout/Header.astro';
+import MobileDispatchBar from '@components/layout/MobileDispatchBar.astro';
+import SEO from '@components/seo/SEO.astro';
+import '@styles/global.css';
+
+interface Props {
+  title?: string | undefined;
+  description?: string | undefined;
+  currentPath?: string | undefined;
+  image?: string | undefined;
+  type?: 'website' | 'article' | undefined;
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>> | undefined;
+}
+
+const { title, description, currentPath = Astro.url.pathname, image, type, jsonLd } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <SEO title={title} description={description} image={image} type={type} jsonLd={jsonLd} />
+  </head>
+  <body class="site-body">
+    <!-- Accessible Skip Link -->
+    <a href="#main" class="skip-link">
+      Skip to main content
+    </a>
+
+    <!-- Top Header Navigation -->
+    <Header currentPath={currentPath} />
+
+    <!-- Main Content Shell -->
+    <main id="main" class="site-main">
+      <slot />
+    </main>
+
+    <!-- Site Footer -->
+    <Footer />
+
+    <!-- Sticky Mobile Bottom Bar (< 48rem) -->
+    <MobileDispatchBar currentPath={currentPath} />
+  </body>
+</html>
+
+<style>
+  .site-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  .site-main {
+    flex: 1 0 auto;
+    width: 100%;
+    /* Extra padding on mobile to clear the sticky bottom dispatch bar */
+    padding-bottom: 6rem;
+  }
+
+  @media (min-width: 48rem) {
+    .site-main {
+      padding-bottom: 0;
+    }
+  }
+</style>

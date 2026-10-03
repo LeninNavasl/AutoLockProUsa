@@ -1,0 +1,332 @@
+---
+import { Image } from 'astro:assets';
+import CtaBanner from '@components/sections/CtaBanner.astro';
+import Badge from '@components/ui/Badge.astro';
+import Icon from '@components/ui/Icon.astro';
+import { SITE_CONFIG } from '@config/site';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  publishDate: string;
+  readingMinutes: number;
+  badge: string;
+  badgeTone?: 'primary' | 'emergency' | 'success' | 'surface' | undefined;
+  cover: ImageMetadata;
+  coverAlt: string;
+}
+
+const {
+  title,
+  description,
+  publishDate,
+  readingMinutes,
+  badge,
+  badgeTone = 'primary',
+  cover,
+  coverAlt
+} = Astro.props;
+
+const canonicalUrl = Astro.url.href;
+
+// Schema.org BlogPosting
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: title,
+  description: description,
+  datePublished: publishDate,
+  url: canonicalUrl,
+  author: {
+    '@type': 'Organization',
+    name: SITE_CONFIG.name,
+    url: SITE_CONFIG.domain
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: SITE_CONFIG.name,
+    logo: {
+      '@type': 'ImageObject',
+      url: `${SITE_CONFIG.domain}/logo.svg`
+    }
+  }
+};
+---
+
+<BaseLayout
+  title={`${title} | ${SITE_CONFIG.name}`}
+  description={description}
+  type="article"
+  jsonLd={articleSchema}
+>
+  <article class="article-layout">
+    <div class="container article-layout__container">
+      <!-- Breadcrumb -->
+      <nav class="article-layout__breadcrumbs" aria-label="Breadcrumb">
+        <ol class="article-layout__crumb-list">
+          <li>
+            <a href="/" class="article-layout__crumb-link">
+              Home
+            </a>
+          </li>
+          <li aria-hidden="true" class="article-layout__crumb-sep">
+            /
+          </li>
+          <li>
+            <a href="/blog/" class="article-layout__crumb-link">
+              Blog
+            </a>
+          </li>
+          <li aria-hidden="true" class="article-layout__crumb-sep">
+            /
+          </li>
+          <li aria-current="page" class="article-layout__crumb-current">
+            {title}
+          </li>
+        </ol>
+      </nav>
+
+      <!-- Article Header -->
+      <header class="article-layout__header">
+        <div class="article-layout__meta-top">
+          <Badge variant={badgeTone} size="md">
+            {badge}
+          </Badge>
+          <span class="article-layout__meta-item">
+            <Icon name="schedule" size={16} />
+            <span>{readingMinutes} min read</span>
+          </span>
+          <span class="article-layout__meta-item">
+            <Icon name="calendar_today" size={16} />
+            <span>{publishDate}</span>
+          </span>
+        </div>
+
+        <h1 class="article-layout__title">{title}</h1>
+        <p class="article-layout__lead">{description}</p>
+      </header>
+
+      <!-- Cover Image -->
+      <div class="article-layout__cover">
+        <Image
+          src={cover}
+          alt={coverAlt}
+          width={1200}
+          height={675}
+          class="article-layout__cover-img"
+          loading="eager"
+        />
+      </div>
+
+      <!-- Article Content Body -->
+      <div class="article-layout__body">
+        <slot />
+      </div>
+
+      <!-- Trust Byline -->
+      <div class="article-layout__byline">
+        <div class="article-layout__byline-icon">
+          <Icon name="verified" size={24} />
+        </div>
+        <div class="article-layout__byline-text">
+          <strong>Verified by AutoLock Pro USA Technical Dispatch</strong>
+          <p>
+            Written and reviewed by certified automotive locksmith specialists adhering to national
+            safe vehicle entry guidelines.
+          </p>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Emergency Dispatch CTA -->
+  <CtaBanner
+    title="Need roadside assistance now?"
+    subtitle="Our mobile locksmith fleet is on call 24/7 across all 50 states. Connect with dispatch in seconds."
+  />
+</BaseLayout>
+
+<style>
+  .article-layout {
+    padding-top: var(--space-md);
+    padding-bottom: var(--space-xl);
+  }
+
+  .article-layout__container {
+    max-width: 52rem;
+  }
+
+  /* Breadcrumbs */
+  .article-layout__breadcrumbs {
+    margin-bottom: var(--space-md);
+  }
+
+  .article-layout__crumb-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-xs);
+    list-style: none;
+    font-size: var(--text-label-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .article-layout__crumb-link {
+    color: var(--color-primary-container);
+    font-weight: 600;
+  }
+
+  .article-layout__crumb-link:hover {
+    text-decoration: underline;
+  }
+
+  .article-layout__crumb-sep {
+    opacity: 0.5;
+  }
+
+  .article-layout__crumb-current {
+    font-weight: 700;
+    color: var(--color-ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 20rem;
+  }
+
+  /* Header */
+  .article-layout__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+  }
+
+  .article-layout__meta-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .article-layout__meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: var(--text-label-sm);
+    font-weight: 600;
+    color: var(--color-ink-muted);
+  }
+
+  .article-layout__title {
+    font-size: var(--text-headline-lg);
+    font-weight: 800;
+    color: var(--color-ink);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .article-layout__lead {
+    font-size: var(--text-body-lg);
+    color: var(--color-ink-muted);
+    line-height: 1.6;
+  }
+
+  /* Cover Image */
+  .article-layout__cover {
+    width: 100%;
+    border-radius: var(--radius-2xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-1);
+    margin-bottom: var(--space-xl);
+    background: var(--color-surface-container);
+  }
+
+  .article-layout__cover-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+  }
+
+  /* Prose Styling */
+  .article-layout__body {
+    font-size: var(--text-body-md);
+    color: var(--color-ink);
+    line-height: 1.75;
+  }
+
+  .article-layout__body :global(h2) {
+    font-size: var(--text-headline-md);
+    font-weight: 800;
+    color: var(--color-ink);
+    margin-top: var(--space-xl);
+    margin-bottom: var(--space-sm);
+  }
+
+  .article-layout__body :global(h3) {
+    font-size: var(--text-headline-sm);
+    font-weight: 700;
+    color: var(--color-ink);
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-xs);
+  }
+
+  .article-layout__body :global(p) {
+    margin-bottom: var(--space-md);
+    color: var(--color-ink);
+  }
+
+  .article-layout__body :global(ul),
+  .article-layout__body :global(ol) {
+    margin-bottom: var(--space-md);
+    padding-left: 1.5rem;
+  }
+
+  .article-layout__body :global(li) {
+    margin-bottom: var(--space-xs);
+    color: var(--color-ink);
+  }
+
+  .article-layout__body :global(strong) {
+    color: var(--color-ink);
+    font-weight: 700;
+  }
+
+  /* Byline Box */
+  .article-layout__byline {
+    margin-top: var(--space-2xl);
+    padding: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .article-layout__byline-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3rem;
+    height: 3rem;
+    background: var(--color-success-container);
+    color: var(--color-success-dark);
+    border-radius: var(--radius-xl);
+    flex-shrink: 0;
+  }
+
+  .article-layout__byline-text strong {
+    font-size: var(--text-label-md);
+    color: var(--color-ink);
+  }
+
+  .article-layout__byline-text p {
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+    margin-top: 0.25rem;
+    margin-bottom: 0;
+  }
+</style>

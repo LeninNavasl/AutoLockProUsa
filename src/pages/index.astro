@@ -1,0 +1,252 @@
+---
+import { Image } from 'astro:assets';
+import CtaBanner from '@components/sections/CtaBanner.astro';
+import Hero from '@components/sections/Hero.astro';
+import ServiceCard from '@components/sections/ServiceCard.astro';
+import TestimonialCard from '@components/sections/TestimonialCard.astro';
+import TrustRibbon from '@components/sections/TrustRibbon.astro';
+import Badge from '@components/ui/Badge.astro';
+import Icon from '@components/ui/Icon.astro';
+import { SITE_CONFIG } from '@config/site';
+import { SERVICES } from '@data/services';
+import { TESTIMONIALS } from '@data/testimonials';
+import BaseLayout from '@layouts/BaseLayout.astro';
+import vanShowcaseImg from '@assets/images/van-showcase.jpg';
+---
+
+<BaseLayout
+  title={`${SITE_CONFIG.name} · ${SITE_CONFIG.tagline}`}
+  description={SITE_CONFIG.description}
+  currentPath="/"
+>
+  <!-- Hero Section -->
+  <Hero />
+
+  <!-- Trust Metrics & GPS Radar Strip -->
+  <TrustRibbon />
+
+  <!-- Core Services Showcase -->
+  <section class="home-services" aria-labelledby="home-services-title">
+    <div class="container">
+      <div class="home-services__header">
+        <div class="home-services__tag">
+          <Icon name="build_circle" size={18} />
+          <span>ON-SITE SOLUTIONS</span>
+        </div>
+        <h2 id="home-services-title" class="home-services__title">
+          Our Core Services
+        </h2>
+        <p class="home-services__subtitle">
+          Immediate mobile roadside assistance delivered directly to your vehicle's bumper.
+        </p>
+      </div>
+
+      <div class="home-services__grid">
+        {SERVICES.map((service) => (
+          <ServiceCard service={service} showImage={false} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- High-Tech Mobile Hardware Showcase -->
+  <section class="home-showcase" aria-labelledby="home-showcase-title">
+    <div class="container">
+      <div class="home-showcase__card">
+        <div class="home-showcase__media">
+          <Image
+            src={vanShowcaseImg}
+            alt="Mobile locksmith van equipped with laser key cutting machines parked at curb"
+            width={1200}
+            height={600}
+            class="home-showcase__img"
+            loading="lazy"
+          />
+        </div>
+        <div class="home-showcase__content">
+          <Badge variant="primary" size="sm">
+            Fully Certified Mobile Units
+          </Badge>
+          <h2 id="home-showcase-title" class="home-showcase__title">
+            Cutting-Edge Laser Hardware On Wheels
+          </h2>
+          <p class="home-showcase__desc">
+            We bring dealership-grade programming instruments and computerized laser cutters
+            straight to your curb, driveway, or highway shoulder.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Verified Roadside Reviews -->
+  <section class="home-reviews" aria-labelledby="home-reviews-title">
+    <div class="container">
+      <div class="home-reviews__header">
+        <div class="home-reviews__rating-badge">
+          <Icon name="star" size={18} />
+          <span>
+            {SITE_CONFIG.ratingValue} / 5.0 Star Rating ({SITE_CONFIG.reviewCount} Reviews)
+          </span>
+        </div>
+        <h2 id="home-reviews-title" class="home-reviews__title">
+          Verified Roadside Reviews
+        </h2>
+      </div>
+
+      <div class="home-reviews__grid">
+        {TESTIMONIALS.map((t) => (
+          <TestimonialCard testimonial={t} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Emergency Dispatch CTA Banner -->
+  <CtaBanner />
+</BaseLayout>
+
+<style>
+  /* Core Services */
+  .home-services {
+    padding-block: var(--space-lg);
+  }
+
+  .home-services__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .home-services__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-primary);
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  .home-services__title {
+    font-size: var(--text-headline-md);
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .home-services__subtitle {
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+  }
+
+  .home-services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .home-services__grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+  }
+
+  /* Hardware Showcase */
+  .home-showcase {
+    padding-block: var(--space-md);
+  }
+
+  .home-showcase__card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-3xl);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .home-showcase__media {
+    width: 100%;
+    height: 14rem;
+    overflow: hidden;
+    background: var(--color-surface-container);
+  }
+
+  .home-showcase__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .home-showcase__content {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+  }
+
+  .home-showcase__title {
+    font-size: var(--text-headline-sm);
+    font-weight: 800;
+    color: var(--color-ink);
+    margin-top: 0.25rem;
+  }
+
+  .home-showcase__desc {
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+    line-height: 1.5;
+  }
+
+  @media (min-width: 48rem) {
+    .home-showcase__media {
+      height: 20rem;
+    }
+    .home-showcase__content {
+      padding: var(--space-lg);
+    }
+  }
+
+  /* Reviews */
+  .home-reviews {
+    padding-block: var(--space-lg);
+  }
+
+  .home-reviews__header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .home-reviews__rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--color-emergency);
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .home-reviews__title {
+    font-size: var(--text-headline-md);
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .home-reviews__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  @media (min-width: 48rem) {
+    .home-reviews__grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--space-md);
+    }
+  }
+</style>

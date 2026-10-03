@@ -1,0 +1,400 @@
+---
+import CtaBanner from '@components/sections/CtaBanner.astro';
+import ServiceCard from '@components/sections/ServiceCard.astro';
+import Badge from '@components/ui/Badge.astro';
+import Icon from '@components/ui/Icon.astro';
+import LiveDot from '@components/ui/LiveDot.astro';
+import { SITE_CONFIG } from '@config/site';
+import { SERVICES } from '@data/services';
+import BaseLayout from '@layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title={`Automotive Locksmith Services | ${SITE_CONFIG.name}`}
+  description="Emergency car lockouts, computerized key fob programming, CNC laser key cutting, and ignition repair delivered directly to your roadside location across the USA."
+  currentPath="/services/"
+>
+  <div class="services-page">
+    <div class="container">
+      <!-- Page Header -->
+      <section class="services-hero">
+        <Badge variant="success" size="md">
+          <LiveDot size="sm" />
+          <span>All 50 States Covered · Mobile Vans On Duty</span>
+        </Badge>
+        <h1 class="services-hero__title">Automotive Locksmith Capabilities</h1>
+        <p class="services-hero__subtitle">
+          Fast roadside assistance with zero dealership wait. Fully equipped mobile vans dispatched
+          24 hours a day, 7 days a week.
+        </p>
+
+        <!-- Micro Dispatch Metric Bar -->
+        <div class="services-hero__metrics">
+          <div class="services-hero__metric-item">
+            <div class="services-hero__metric-icon services-hero__metric-icon--blue">
+              <Icon name="verified" size={20} />
+            </div>
+            <div class="services-hero__metric-text">
+              <span class="services-hero__metric-label">LICENSED</span>
+              <span class="services-hero__metric-val">Bonded & Insured</span>
+            </div>
+          </div>
+          <div class="services-hero__metric-item">
+            <div class="services-hero__metric-icon services-hero__metric-icon--orange">
+              <Icon name="near_me" size={20} />
+            </div>
+            <div class="services-hero__metric-text">
+              <span class="services-hero__metric-label">RESPONSE</span>
+              <span class="services-hero__metric-val">Rapid GPS Dispatch</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Comprehensive Field Services List -->
+      <section class="services-list" aria-labelledby="field-services-title">
+        <div class="services-list__heading">
+          <div class="services-list__bar"></div>
+          <h2 id="field-services-title" class="services-list__title">
+            Comprehensive Field Services
+          </h2>
+          <span class="services-list__status">Mobile Unit Ready</span>
+        </div>
+
+        <div class="services-list__grid">
+          {SERVICES.map((service) => (
+            <ServiceCard service={service} showImage={true} />
+          ))}
+        </div>
+      </section>
+
+      <!-- 3-Step Process: How Our Mobile Service Works -->
+      <section class="services-process" aria-labelledby="process-title">
+        <div class="services-process__header">
+          <Badge variant="primary" size="sm">
+            Effortless 3-Step Process
+          </Badge>
+          <h2 id="process-title" class="services-process__title">
+            How Our Mobile Service Works
+          </h2>
+          <p class="services-process__subtitle">
+            No tow truck booking, no dealership appointments. We bring the full workshop directly to
+            your vehicle's bumper.
+          </p>
+        </div>
+
+        <div class="services-process__stepper">
+          <!-- Step 1 -->
+          <div class="process-step">
+            <div class="process-step__number process-step__number--1">1</div>
+            <div class="process-step__content">
+              <div class="process-step__top">
+                <h3 class="process-step__title">Call Dispatch Desk</h3>
+                <Icon
+                  name="headset_mic"
+                  size={20}
+                  class="process-step__icon process-step__icon--blue"
+                />
+              </div>
+              <p class="process-step__desc">
+                Share your vehicle year, make, model, and current location with our 24/7 operator.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="process-step">
+            <div class="process-step__number process-step__number--2">2</div>
+            <div class="process-step__content">
+              <div class="process-step__top">
+                <h3 class="process-step__title">Tech En Route</h3>
+                <Icon
+                  name="local_shipping"
+                  size={20}
+                  class="process-step__icon process-step__icon--orange"
+                />
+              </div>
+              <p class="process-step__desc">
+                A verified local mobile locksmith van is immediately assigned and drives directly to
+                your spot with live GPS tracking.
+              </p>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="process-step">
+            <div class="process-step__number process-step__number--3">3</div>
+            <div class="process-step__content">
+              <div class="process-step__top">
+                <h3 class="process-step__title">On-Site Solution</h3>
+                <Icon
+                  name="task_alt"
+                  size={20}
+                  class="process-step__icon process-step__icon--green"
+                />
+              </div>
+              <p class="process-step__desc">
+                All laser cutting, ECU programming, or lockout assistance completed on the spot in
+                minutes. Test your key and drive away.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <!-- Emergency Dispatch CTA Banner -->
+  <CtaBanner
+    title="Need service right away?"
+    subtitle="Lockout or lost keys? Speak directly with our 24/7 centralized dispatch team for quick roadside resolution."
+  />
+</BaseLayout>
+
+<style>
+  .services-page {
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-2xl);
+  }
+
+  /* Services Hero */
+  .services-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+    max-width: 44rem;
+    margin-bottom: var(--space-xl);
+  }
+
+  .services-hero__title {
+    font-size: var(--text-headline-lg);
+    font-weight: 800;
+    color: var(--color-ink);
+    margin-top: 0.25rem;
+  }
+
+  .services-hero__subtitle {
+    font-size: var(--text-body-md);
+    color: var(--color-ink-muted);
+    line-height: 1.6;
+  }
+
+  .services-hero__metrics {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xs);
+    width: 100%;
+    max-width: 32rem;
+    margin-top: var(--space-sm);
+    background: var(--color-surface-container-low);
+    padding: var(--space-xs);
+    border-radius: var(--radius-2xl);
+  }
+
+  .services-hero__metric-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background: var(--color-surface);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .services-hero__metric-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--radius-md);
+    flex-shrink: 0;
+  }
+
+  .services-hero__metric-icon--blue {
+    background: var(--color-primary-fixed);
+    color: var(--color-primary);
+  }
+
+  .services-hero__metric-icon--orange {
+    background: #ffedd5;
+    color: #c2410c;
+  }
+
+  .services-hero__metric-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .services-hero__metric-label {
+    font-size: 0.6875rem;
+    font-weight: 700;
+    color: var(--color-ink-subtle);
+    letter-spacing: 0.04em;
+  }
+
+  .services-hero__metric-val {
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    color: var(--color-ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* Services List */
+  .services-list {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .services-list__heading {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .services-list__bar {
+    width: 4px;
+    height: 1.25rem;
+    background: var(--color-primary);
+    border-radius: var(--radius-full);
+  }
+
+  .services-list__title {
+    font-size: var(--text-headline-sm);
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .services-list__status {
+    margin-left: auto;
+    font-size: var(--text-label-sm);
+    font-weight: 600;
+    color: var(--color-ink-muted);
+  }
+
+  .services-list__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (min-width: 48rem) {
+    .services-list__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* 3-Step Process */
+  .services-process {
+    background: var(--color-surface-container-low);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-lg);
+    border: 1px solid var(--color-border);
+  }
+
+  .services-process__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+  }
+
+  .services-process__title {
+    font-size: var(--text-headline-md);
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .services-process__subtitle {
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+    max-width: 32rem;
+  }
+
+  .services-process__stepper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+    max-width: 44rem;
+    margin-inline: auto;
+  }
+
+  .process-step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .process-step__number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: var(--radius-full);
+    font-size: var(--text-headline-sm);
+    font-weight: 800;
+    color: #ffffff;
+    flex-shrink: 0;
+  }
+
+  .process-step__number--1 {
+    background: var(--color-primary);
+  }
+
+  .process-step__number--2 {
+    background: var(--color-emergency);
+  }
+
+  .process-step__number--3 {
+    background: var(--color-success-dark);
+  }
+
+  .process-step__content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    min-width: 0;
+  }
+
+  .process-step__top {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .process-step__title {
+    font-size: var(--text-headline-sm);
+    font-weight: 700;
+    color: var(--color-ink);
+  }
+
+  .process-step__icon--blue {
+    color: var(--color-primary);
+  }
+
+  .process-step__icon--orange {
+    color: var(--color-emergency);
+  }
+
+  .process-step__icon--green {
+    color: var(--color-success-dark);
+  }
+
+  .process-step__desc {
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+    line-height: 1.5;
+  }
+</style>

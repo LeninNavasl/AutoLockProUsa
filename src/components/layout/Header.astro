@@ -1,0 +1,152 @@
+---
+import PhoneLink from '@components/ui/PhoneLink.astro';
+import { SITE_CONFIG } from '@config/site';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+function isActive(href: string): boolean {
+  if (href === '/') {
+    return currentPath === '/' || currentPath === '';
+  }
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="site-header">
+  <div class="site-header__container container">
+    <!-- Brand Logo -->
+    <a href="/" class="site-header__brand" aria-label="AutoLock Pro USA - Home">
+      <img
+        src="/logo.svg"
+        alt="AutoLock Pro USA Logo"
+        width="180"
+        height="48"
+        class="site-header__logo"
+      />
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="site-header__nav" aria-label="Main Navigation">
+      <ul class="site-header__menu">
+        {SITE_CONFIG.navItems.map((item) => (
+          <li class="site-header__item">
+            <a
+              href={item.href}
+              class:list={[
+                'site-header__link',
+                { 'site-header__link--active': isActive(item.href) }
+              ]}
+              aria-current={isActive(item.href) ? 'page' : undefined}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <!-- Header Phone CTA -->
+    <div class="site-header__cta">
+      <!-- Desktop Pill -->
+      <div class="site-header__cta-desktop">
+        <PhoneLink variant="pill" showLabel={true} prefixText="Call Now" />
+      </div>
+      <!-- Mobile Compact Pill -->
+      <div class="site-header__cta-mobile">
+        <PhoneLink variant="compact" showLabel={true} prefixText="" />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    background-color: rgba(250, 248, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    transition: background-color var(--transition-fast);
+  }
+
+  .site-header__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.25rem;
+    gap: var(--space-md);
+  }
+
+  .site-header__brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .site-header__logo {
+    height: 2.25rem;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .site-header__nav {
+    display: none;
+  }
+
+  .site-header__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: var(--space-lg);
+  }
+
+  .site-header__link {
+    font-size: var(--text-label-md);
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast);
+  }
+
+  .site-header__link:hover {
+    color: var(--color-primary-container);
+  }
+
+  .site-header__link--active {
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+
+  .site-header__cta-desktop {
+    display: none;
+  }
+
+  .site-header__cta-mobile {
+    display: block;
+  }
+
+  /* Tablet & Desktop */
+  @media (min-width: 48rem) {
+    .site-header__nav {
+      display: block;
+    }
+
+    .site-header__cta-desktop {
+      display: block;
+    }
+
+    .site-header__cta-mobile {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,145 @@
+---
+import Icon from '@components/ui/Icon.astro';
+import LiveDot from '@components/ui/LiveDot.astro';
+import { SITE_CONFIG } from '@config/site';
+import { formatTelHref } from '@lib/contact';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = Astro.url.pathname } = Astro.props;
+
+function isActive(href: string): boolean {
+  if (href === '/') {
+    return currentPath === '/' || currentPath === '';
+  }
+  return currentPath.startsWith(href);
+}
+
+const telHref = formatTelHref(SITE_CONFIG.phoneDisplay);
+---
+
+<nav class="mobile-dispatch-bar" aria-label="Mobile Emergency and Page Navigation">
+  <!-- Top Urgent Call Action Strip -->
+  <div class="mobile-dispatch-bar__strip">
+    <a
+      href={telHref}
+      class="mobile-dispatch-bar__call-btn"
+      aria-label={`Emergency Dispatch Call: ${SITE_CONFIG.phoneDisplay}`}
+    >
+      <LiveDot size="sm" />
+      <span class="mobile-dispatch-bar__call-text">
+        ⚡ 24/7 Mobile Dispatch — Call {SITE_CONFIG.phoneDisplay}
+      </span>
+    </a>
+  </div>
+
+  <!-- Bottom Navigation Tabs -->
+  <div class="mobile-dispatch-bar__tabs">
+    {SITE_CONFIG.navItems.map((item) => (
+      <a
+        href={item.href}
+        class:list={[
+          'mobile-dispatch-bar__tab',
+          { 'mobile-dispatch-bar__tab--active': isActive(item.href) }
+        ]}
+        aria-current={isActive(item.href) ? 'page' : undefined}
+      >
+        <Icon name={item.icon} size={22} class="mobile-dispatch-bar__tab-icon" />
+        <span class="mobile-dispatch-bar__tab-label">{item.label}</span>
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .mobile-dispatch-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(250, 248, 255, 0.94);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-top: 1px solid var(--color-border);
+    box-shadow: 0 -4px 20px rgba(15, 23, 42, 0.08);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  .mobile-dispatch-bar__strip {
+    padding: var(--space-xs) var(--gutter) 0.15rem;
+  }
+
+  .mobile-dispatch-bar__call-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    width: 100%;
+    padding: 0.55rem 0.85rem;
+    background-color: var(--color-emergency-container);
+    color: var(--color-on-emergency);
+    border-radius: var(--radius-full);
+    font-size: var(--text-label-sm);
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.35);
+    transition: transform var(--transition-fast);
+  }
+
+  .mobile-dispatch-bar__call-btn:active {
+    transform: scale(0.98);
+  }
+
+  .mobile-dispatch-bar__call-text {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .mobile-dispatch-bar__tabs {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 3.5rem;
+    padding-inline: var(--space-xs);
+  }
+
+  .mobile-dispatch-bar__tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-width: 48px;
+    min-height: 44px;
+    color: var(--color-ink-muted);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .mobile-dispatch-bar__tab-label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+  }
+
+  .mobile-dispatch-bar__tab--active {
+    color: var(--color-primary);
+  }
+
+  .mobile-dispatch-bar__tab--active .mobile-dispatch-bar__tab-label {
+    font-weight: 700;
+  }
+
+  /* Hide on screens larger than mobile */
+  @media (min-width: 48rem) {
+    .mobile-dispatch-bar {
+      display: none;
+    }
+  }
+</style>

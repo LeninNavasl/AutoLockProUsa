@@ -1,0 +1,5 @@
+dist/
+.astro/
+node_modules/
+stitch_autolock_pro_usa_website/
+package-lock.json
