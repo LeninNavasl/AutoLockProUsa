@@ -78,7 +78,7 @@ graph TD
     Tokens[src/styles/tokens.css] --> AllComponents[Astro Components]
 ```
 
-- **Business Details:** Phone number `(800) 555-0199`, email `dispatch@autolockprousa.com`, operating hours, and licensing information are defined **only once** in `src/config/site.ts`. No hardcoded phone numbers or emails exist across components.
+- **Business Details:** Phone number `(800) 555-0199`, email `autolockprousa@autolockprousa.com`, operating hours, and licensing information are defined **only once** in `src/config/site.ts`. No hardcoded phone numbers or emails exist across components.
 - **Structured Data:** Schema.org JSON-LD (`Locksmith`, `Service`, `FAQPage`, `BlogPosting`) is dynamically derived from `src/config/site.ts` and `src/data/`.
 
 ---
@@ -86,6 +86,7 @@ graph TD
 ## 5. Security & Threat Modeling
 
 1. **Strict Content Security Policy:**
+
    ```http
    default-src 'none';
    script-src 'self';
@@ -97,6 +98,7 @@ graph TD
    form-action 'none';
    frame-ancestors 'none';
    ```
+
 2. **Clickjacking & Framing:** Prevented via `frame-ancestors 'none'` and `X-Frame-Options: DENY`.
 3. **MIME Sniffing:** Prevented via `X-Content-Type-Options: nosniff`.
 4. **Referrer Policy:** `strict-origin-when-cross-origin`.

@@ -7,6 +7,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-10-08
+
+### Changed
+
+- Updated official brand email address to `autolockprousa@autolockprousa.com` (`specs/003-brand-email-update`):
+  - Updated single source of truth in `src/config/site.ts`.
+  - Updated client-side copy fallback in `src/scripts/copy-email.ts`.
+  - Updated unit test assertions in `tests/contact.test.ts`.
+  - Updated documentation in `docs/ARCHITECTURE.md`.
+  - Propagated to Contact page, copy-to-clipboard button, mailto link, and Schema.org JSON-LD.
+
+## [1.1.0] - 2026-10-07
+
+### Added
+
+- Official Facebook social profile integration (`specs/002-facebook-social-links`):
+  - Added `social.facebook` property to `SITE_CONFIG` in `src/config/site.ts`.
+  - Added self-hosted inline vector SVG for the `facebook` icon in `src/components/ui/Icon.astro`.
+  - Added accessible Facebook link pill in `src/components/layout/Footer.astro` with `target="_blank"` and `rel="noopener noreferrer"`.
+  - Added dedicated official Facebook channel card to `src/pages/contact.astro`.
+  - Added `sameAs` array referencing the Facebook profile in Schema.org LocalBusiness structured data in `src/components/seo/SEO.astro`.
+  - Added URL validation helpers (`isValidHttpsUrl`, `formatSocialHref`) in `src/lib/contact.ts` with unit test suite in `tests/contact.test.ts`.
+
 ## [1.0.0] - 2026-10-03
 
 ### Added

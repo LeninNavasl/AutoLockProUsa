@@ -185,6 +185,38 @@ const mailtoHref = formatMailtoHref(SITE_CONFIG.email, 'AutoLock Pro USA - Servi
         </p>
       </section>
 
+      <!-- Official Facebook Page Card -->
+      {SITE_CONFIG.social.facebook && (
+        <section class="contact-social-card" aria-labelledby="social-card-title">
+          <div class="contact-social-card__content">
+            <div class="contact-social-card__icon-wrap">
+              <Icon name="facebook" size={24} />
+            </div>
+            <div class="contact-social-card__body">
+              <h2 id="social-card-title" class="contact-social-card__title">
+                Official Facebook Page
+              </h2>
+              <p class="contact-social-card__desc">
+                Follow our official page for community updates, automotive security advice, and
+                verified field service highlights.
+              </p>
+            </div>
+          </div>
+          <div class="contact-social-card__action">
+            <a
+              href={SITE_CONFIG.social.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="contact-social-card__btn"
+              aria-label="Visit AutoLock Pro USA official Facebook page (opens in new tab)"
+            >
+              <span>Visit Official Page</span>
+              <Icon name="open_in_new" size={18} />
+            </a>
+          </div>
+        </section>
+      )}
+
       <!-- Frequently Asked Questions -->
       <FaqAccordion faqs={FAQS} />
     </div>
@@ -602,6 +634,112 @@ const mailtoHref = formatMailtoHref(SITE_CONFIG.email, 'AutoLock Pro USA - Servi
     }
     .contact-email-box__mailto-btn {
       flex: 1;
+    }
+  }
+
+  /* Social Card */
+  .contact-social-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-3xl);
+    padding: var(--space-lg);
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .contact-social-card__content {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+
+  .contact-social-card__icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    background: var(--color-surface-container);
+    color: var(--color-primary-container);
+    border-radius: var(--radius-xl);
+    flex-shrink: 0;
+  }
+
+  .contact-social-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .contact-social-card__title {
+    font-size: var(--text-headline-sm);
+    font-weight: 800;
+    color: var(--color-ink);
+  }
+
+  .contact-social-card__desc {
+    font-size: var(--text-body-sm);
+    color: var(--color-ink-muted);
+    line-height: 1.5;
+  }
+
+  .contact-social-card__action {
+    display: flex;
+  }
+
+  .contact-social-card__btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-xs);
+    width: 100%;
+    min-height: 44px;
+    padding: 0.75rem 1.25rem;
+    background: var(--color-surface-container);
+    color: var(--color-ink);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: var(--text-label-md);
+    font-weight: 700;
+    text-decoration: none;
+    transition:
+      background-color var(--transition-fast),
+      border-color var(--transition-fast),
+      color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .contact-social-card__btn:hover {
+    background: var(--color-primary-container);
+    border-color: var(--color-primary-container);
+    color: var(--color-on-primary);
+    transform: translateY(-2px);
+  }
+
+  .contact-social-card__btn:focus-visible {
+    outline: 2px solid var(--color-primary-container);
+    outline-offset: 2px;
+  }
+
+  @media (min-width: 36rem) {
+    .contact-social-card {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .contact-social-card__content {
+      flex: 1;
+    }
+
+    .contact-social-card__action {
+      flex-shrink: 0;
+    }
+
+    .contact-social-card__btn {
+      width: auto;
     }
   }
 </style>

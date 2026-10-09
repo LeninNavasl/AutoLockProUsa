@@ -9,5 +9,6 @@
   "typescript.tsdk": "node_modules/typescript/lib",
   "files.associations": {
     "*.astro": "astro"
-  }
+  },
+  "markdownlint.configFile": ".markdownlint.json"
 }

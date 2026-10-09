@@ -2,8 +2,10 @@ import { describe, expect, it } from 'vitest';
 import {
   cleanPhoneNumber,
   formatMailtoHref,
+  formatSocialHref,
   formatTelHref,
-  isValidEmail
+  isValidEmail,
+  isValidHttpsUrl
 } from '../src/lib/contact';
 
 describe('Contact Utilities', () => {
@@ -22,17 +24,30 @@ describe('Contact Utilities', () => {
   });
 
   it('isValidEmail detects valid and invalid formats', () => {
-    expect(isValidEmail('dispatch@autolockprousa.com')).toBe(true);
+    expect(isValidEmail('autolockprousa@autolockprousa.com')).toBe(true);
     expect(isValidEmail('invalid-email')).toBe(false);
     expect(isValidEmail('test@domain')).toBe(false);
   });
 
   it('formatMailtoHref formats clean mailto links', () => {
-    expect(formatMailtoHref('dispatch@autolockprousa.com')).toBe(
-      'mailto:dispatch@autolockprousa.com'
+    expect(formatMailtoHref('autolockprousa@autolockprousa.com')).toBe(
+      'mailto:autolockprousa@autolockprousa.com'
     );
-    expect(formatMailtoHref('dispatch@autolockprousa.com', 'Emergency Service')).toBe(
-      'mailto:dispatch@autolockprousa.com?subject=Emergency%20Service'
+    expect(formatMailtoHref('autolockprousa@autolockprousa.com', 'Emergency Service')).toBe(
+      'mailto:autolockprousa@autolockprousa.com?subject=Emergency%20Service'
     );
+  });
+
+  it('isValidHttpsUrl validates secure URLs correctly', () => {
+    expect(isValidHttpsUrl('https://www.facebook.com/profile.php?id=61595108823254')).toBe(true);
+    expect(isValidHttpsUrl('http://insecure.com')).toBe(false);
+    expect(isValidHttpsUrl('javascript:alert(1)')).toBe(false);
+    expect(isValidHttpsUrl('not-a-url')).toBe(false);
+  });
+
+  it('formatSocialHref validates and returns clean HTTPS URL', () => {
+    const fbUrl = 'https://www.facebook.com/profile.php?id=61595108823254';
+    expect(formatSocialHref(fbUrl)).toBe(fbUrl);
+    expect(() => formatSocialHref('http://insecure-site.com')).toThrow();
   });
 });

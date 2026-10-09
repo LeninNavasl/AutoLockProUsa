@@ -4,9 +4,10 @@ All functional features, page additions, and architectural shifts must be specif
 
 ## Specification Index
 
-| ID                              | Title                                         | Status   | Description                                                                                |
-| ------------------------------- | --------------------------------------------- | -------- | ------------------------------------------------------------------------------------------ |
-| [001](001-core-website/spec.md) | Core Marketing Website & Security Foundations | Approved | Comprehensive implementation of Home, Services, Contact, Blog, Design Tokens, and Harness. |
+| ID                                       | Title                                         | Status      | Description                                                                                        |
+| ---------------------------------------- | --------------------------------------------- | ----------- | -------------------------------------------------------------------------------------------------- |
+| [001](001-core-website/spec.md)          | Core Marketing Website & Security Foundations | Approved    | Comprehensive implementation of Home, Services, Contact, Blog, Design Tokens, and Harness.         |
+| [002](002-facebook-social-links/spec.md) | Official Facebook Social Profile Integration  | Implemented | Integrate official Facebook page in Footer, Contact page, Schema.org sameAs, and self-hosted icon. |
 
 ## Workflow Summary
 

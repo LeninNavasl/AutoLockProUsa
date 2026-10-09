@@ -1,7 +1,7 @@
 # Project State — AutoLock Pro USA
 
-**Last updated:** 2026-10-03  
-**Status:** Implemented & Verified (Spec 001 Complete, Full Harness Passing)
+**Last updated:** 2026-10-08  
+**Status:** Implemented & Verified (Spec 001, Spec 002 & Spec 003 Complete, Full Harness Passing)
 
 ---
 
@@ -18,6 +18,8 @@ AutoLock Pro USA is a static, modern, secure, and mobile-first website for a nat
 - [x] **Harness Scaffolding:** Quality gates, security audit runner, dependency policies, and architecture decisions (ADR 0001 - 0004).
 - [x] **Environment Preparation:** Node.js v24 LTS + npm installed and verified.
 - [x] **Specs:** `specs/001-core-website/` fully specified, planned, implemented, and verified.
+- [x] **Spec 002 (Facebook Social Profile):** Integrated official Facebook link in `SITE_CONFIG`, Footer, Contact page, Schema.org `sameAs`, self-hosted SVG icon in `Icon.astro`, and verified via harness.
+- [x] **Spec 003 (Brand Email Configuration Update):** Configured `autolockprousa@autolockprousa.com` across `SITE_CONFIG`, copy-email script, Schema.org JSON-LD, and unit test suite.
 - [x] **Site Configuration:** `src/config/site.ts` (single source of truth for phone, email, licenses, nav).
 - [x] **Design Tokens & Global CSS:** `src/styles/tokens.css` and `src/styles/global.css`.
 - [x] **Layout & Core UI Components:** `BaseLayout`, `Header`, `Footer`, `MobileDispatchBar`, `SEO`, `Icon`, `Badge`, `LiveDot`, `PhoneLink`.

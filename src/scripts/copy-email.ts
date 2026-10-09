@@ -10,7 +10,7 @@ export function setupEmailCopy(): void {
   if (!btn) return;
 
   btn.addEventListener('click', async () => {
-    const email = btn.getAttribute('data-email') || 'dispatch@autolockprousa.com';
+    const email = btn.getAttribute('data-email') || 'autolockprousa@autolockprousa.com';
 
     try {
       if (navigator.clipboard && window.isSecureContext) {

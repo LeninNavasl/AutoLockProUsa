@@ -30,3 +30,20 @@ export function formatMailtoHref(email: string, subject?: string): string {
   }
   return `mailto:${trimmed}?subject=${encodeURIComponent(subject)}`;
 }
+
+export function isValidHttpsUrl(url: string): boolean {
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+export function formatSocialHref(url: string): string {
+  const trimmed = url.trim();
+  if (!isValidHttpsUrl(trimmed)) {
+    throw new Error(`Invalid social URL: ${trimmed}. Must be an HTTPS link.`);
+  }
+  return trimmed;
+}

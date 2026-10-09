@@ -9,6 +9,13 @@ export interface StateLicense {
   code: string;
 }
 
+export interface SocialLinks {
+  facebook?: string;
+  instagram?: string;
+  twitter?: string;
+  linkedin?: string;
+}
+
 export interface SiteConfig {
   name: string;
   shortName: string;
@@ -24,6 +31,7 @@ export interface SiteConfig {
   reviewCount: string;
   navItems: NavItem[];
   licenses: StateLicense[];
+  social: SocialLinks;
 }
 
 export const SITE_CONFIG: SiteConfig = {
@@ -34,7 +42,7 @@ export const SITE_CONFIG: SiteConfig = {
     'Fast car key replacement, transponder fob programming, laser key cutting, and damage-free vehicle lockout assistance dispatched directly to your roadside location across all 50 states.',
   phoneDisplay: '(800) 555-0199',
   phoneRaw: '18005550199',
-  email: 'dispatch@autolockprousa.com',
+  email: 'autolockprousa@autolockprousa.com',
   domain: 'https://autolockprousa.com',
   operatingHours: '24 Hours / 7 Days / 365 Days',
   responseWindow: '15–30 Minutes',
@@ -51,5 +59,8 @@ export const SITE_CONFIG: SiteConfig = {
     { state: 'CA', code: 'LCO-6102' },
     { state: 'IL', code: '192.000421' },
     { state: 'FL', code: 'Bonded & Insured' }
-  ]
+  ],
+  social: {
+    facebook: 'https://www.facebook.com/profile.php?id=61595108823254'
+  }
 };
